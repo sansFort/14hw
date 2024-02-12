@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Форма с куками</title>
+</head>
+<body>
+
+  <form id="form">
+    <input type="text" name="name" placeholder="Введіть ім'я">
+    <input type="number" name="age" placeholder="Введіть вік">
+    <input type="number" name="days" placeholder="Введіть днів зберігання">
+    <input type="submit" value="Зберегти">
+  </form>
+
+  <div id="cookies"></div>
+
+  <script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const name = form.elements['name'].value;
+      const age = form.elements['age'].value;
+      const days = form.elements['days'].value;
+
+      document.cookie = `name=${name};max-age=${days*24*60*60}`;
+      document.cookie = `age=${age};max-age=${days*24*60*60}`;
+
+      document.getElementById('cookies').textContent = `name: ${document.cookie.replace(/(?:(?:^|.*;\s*)name\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`;
+      document.getElementById('cookies').textContent += `\nage: ${document.cookie.replace(/(?:(?:^|.*;\s*)age\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`;
+    });
+  </script>
+
+</body>
+</html>
